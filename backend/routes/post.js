@@ -50,6 +50,7 @@ router.get('/', async (req, res) => {
   try {
     const posts = await Post.find()
       .populate('userId', 'username')
+      .populate('comments.userId', 'username')
       .sort({ createdAt: -1 });
     res.json(posts);
   } catch (err) {
@@ -62,7 +63,7 @@ router.delete('/:id', verifyToken, async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
     if (!post) return res.status(404).json({ message: 'Post not found' });
-    if (post.user.toString() !== req.user.id)
+    if (post.userId.toString() !== req.user.id)
       return res.status(403).json({ message: 'Not authorized' });
 
     await post.deleteOne();
@@ -87,7 +88,15 @@ router.post('/:id/comments', verifyToken, async (req, res) => {
     post.comments.push(newComment);
     await post.save();
 
-    res.status(201).json(post.comments);
+    // ✅ Fetch the post again and populate the last comment's userId
+    const updatedPost = await Post.findById(post._id).populate({
+      path: 'comments.userId',
+      select: 'username'
+    });
+
+    const lastComment = updatedPost.comments[updatedPost.comments.length - 1];
+
+    res.status(201).json(lastComment);
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
