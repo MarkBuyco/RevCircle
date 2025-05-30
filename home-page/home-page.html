@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rev Circle | Home</title>
+  <link rel="stylesheet" href="../universal/shared.css" /> 
+  <link rel="stylesheet" href="css/home-page.css" />
+  <link rel="icon" href="../universal/RC-logo.png" type="image/png" />
+</head>
+
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+      <a href="home-page.html">
+        <img src="../universal/RC-logo.png" alt="Rev Circle" />
+      </a>
+    <div class="nav-links">
+      <a href="#" onclick="openPostModal()"> ➕ Post </a>
+      <a href="../profile-page/profile-page.html">My Profile</a>
+      <a href="home-page.html">Home</a>
+      <a href="../login-page/login.html" onclick="logout()">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Main Feed -->
+  <div class="feed" id="posts-container">
+
+    <!-- Post 1 -->
+    <div class="post-card">
+      <h3 class="post-title">Best oil for a 2008 Civic?</h3>
+      <p class="post-body">I just bought a Civic and I'm unsure which oil to go for. Any advice?</p>
+      <div class="post-footer">
+        <span>Posted by @CivicLover</span>
+        <div class="actions">
+          <span>👍 12</span>
+          <span>💬 5</span>
+        </div>
+      </div>
+
+      <!-- Comments -->
+      <div class="comments">
+        <div class="comment">
+          <strong>@OilGuru:</strong> Try 5W-30 synthetic. Works great in mine.
+        </div>
+        <div class="comment">
+          <strong>@MechMike:</strong> Don’t forget to check your manual first.
+        </div>
+
+        <form class="comment-form">
+          <input type="text" placeholder="Write a comment..." />
+          <button type="submit">Post</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Post 2 -->
+    <div class="post-card">
+      <h3 class="post-title">Aftermarket exhausts worth it?</h3>
+      <p class="post-body">Thinking of installing one on my WRX. Worth the cost?</p>
+      <div class="post-footer">
+        <span>Posted by @BoostedWRX</span>
+        <div class="actions">
+          <span>👍 9</span>
+          <span>💬 2</span>
+        </div>
+      </div>
+
+      <!-- Comments -->
+      <div class="comments">
+        <div class="comment">
+          <strong>@CarGuy22:</strong> Totally worth it if you're after sound and slight performance!
+        </div>
+        <div class="comment">
+          <strong>@ExhaustNerd:</strong> Look into Borla or Invidia systems.
+        </div>
+
+        <form class="comment-form">
+          <input type="text" placeholder="Write a comment..." />
+          <button type="submit">Post</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Post 3 with Image -->
+    <div class="post-card">
+      <h3 class="post-title">Aftermarket exhausts worth it?</h3>
+
+      <div class="post-image">
+        <img src="assets/wrx.jpg" alt="Post image" />
+      </div>
+
+      <p class="post-body">Thinking of installing one on my WRX. Worth the cost?</p>
+      <div class="post-footer">
+        <span>Posted by @BoostedWRX</span>
+        <div class="actions">
+          <span>👍 9</span>
+          <span>💬 2</span>
+        </div>
+      </div>
+
+      <!-- Comments -->
+      <div class="comments">
+        <div class="comment">
+          <strong>@WRXFan:</strong> Do it! Makes it come alive.
+        </div>
+        <div class="comment">
+          <strong>@MufflerMan:</strong> Just don’t cheap out on the brand.
+        </div>
+
+        <form class="comment-form">
+          <input type="text" placeholder="Write a comment..." />
+          <button type="submit">Post</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Post 4 -->
+    <div class="post-card">
+      <h3 class="post-title">What's the best tire brand for track days?</h3>
+      <p class="post-body">
+        I’ve been running Michelin PS4s but want to try something more aggressive. Recommendations?
+      </p>
+      <div class="post-footer">
+        <span>Posted by @TrackDad</span>
+        <div class="actions">
+          <span>👍 14</span>
+          <span>💬 5</span>
+        </div>
+      </div>
+
+      <!-- Comments -->
+      <div class="comments">
+        <div class="comment">
+          <strong>@GripKing:</strong> Try Yokohama A052 or Toyo R888R.
+        </div>
+        <div class="comment">
+          <strong>@LapJunkie:</strong> Falken RT660 is good bang for buck.
+        </div>
+
+        <form class="comment-form">
+          <input type="text" placeholder="Write a comment..." />
+          <button type="submit">Post</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal for Creating a Post -->
+<div class="modal-overlay" id="postModal">
+  <div class="modal-content">
+    <span class="close-button" onclick="closePostModal()">×</span>
+    <h2>Create a Post</h2>
+    <form id="postForm">
+      <input type="text" id="postTitle" placeholder="Post title..." required />
+      <textarea id="postBody" rows="3" placeholder="What's on your mind?" required></textarea>
+
+      <!-- Custom File Upload -->
+      <label for="imageUpload" class="custom-file-upload">
+        📁 Choose Image
+      </label>
+      <input type="file" id="imageUpload" accept="image/*" />
+      <span id="fileName">No file chosen</span>
+
+      <button type="submit">Post</button>
+    </form>
+  </div>
+</div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <a href="home-page.html">
+          <img src="../universal/RC-logo.png" alt="Rev Circle Logo" />
+        </a>
+        <p>&copy; 2025 Rev Circle. All rights reserved.</p>
+      </div>
+      <div class="footer-links">
+        <a href="../about-page/about-page.html">About</a>
+        <a href="home-page.html">Home</a>
+        <a href="../login-page/login.html">Logout</a>  
+
+      </div>
+    </div>
+  </footer>
+
+  <script src="home-page.js"></script>
+  <script src="../universal/post-popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign Up | Rev Circle</title>
+  <link rel="icon" href="../universal/RC-logo.png" type="image/png" /> ,<!-- Favicon -->
+  <link rel="stylesheet" href="css/signup.css" /> <!-- Link to CSS file -->
+</head>
+
+<body>
+  <div class="container">
+    
+    <!-- Sign Up Form Box -->
+    <div class="signup-box">
+      <h2>Create Account</h2>
+      <p>Join Rev Circle Now!</p>
+      
+      <form id="signupForm">
+        <!-- Full Name Input -->
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" required />
+
+        <!-- Email Input -->
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+
+        <!-- Username Input -->
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
+
+        <!-- Password Input -->
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+
+        <!-- Sign Up Button -->
+        <button class="btn-signup" type="submit">Sign Up</button>
+      </form>
+
+      <!-- Link to Login Page -->
+      <div class="login-link">
+        <p>Already have an account? <a href="../login-page/login.html">Log In</a></p>
+      </div>
+    </div>
+
+    <!-- Side Image Box -->
+    <div class="image-box">
+      <img src="assets/sign-up-poster.png" alt="Car image" />
+    </div>
+  </div>
+  <script src="signup.js" defer></script>
+</body>
+</html>

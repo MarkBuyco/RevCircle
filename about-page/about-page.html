@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rev Circle | About</title>
+  <link rel="stylesheet" href="../universal/shared.css" />
+  <link rel="stylesheet" href="css/about-page.css" />
+  <link rel="icon" href="../universal/RC-logo.png" type="image/png" />
+</head>
+
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <a href="../home-page/home-page.html">
+      <img src="../universal/RC-logo.png" alt="Rev Circle" />
+    </a>
+    <div class="nav-links">
+      <a href="#" onclick="openPostModal()">➕ Post</a>
+      <a href="../profile-page/profile-page.html">My Profile</a>
+      <a href="../home-page/home-page.html">Home</a>
+      <a href="../login-page/login.html">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Modal for Creating a Post -->
+  <div class="modal-overlay" id="postModal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closePostModal()">×</span>
+      <h2>Create a Post</h2>
+      <form id="postForm">
+        <textarea id="caption" rows="3" placeholder="What's on your mind?" required></textarea>
+
+        <!-- Custom File Upload -->
+        <label for="imageUpload" class="custom-file-upload">📁 Choose Image</label>
+        <input type="file" id="imageUpload" accept="image/*" />
+        <span id="fileName">No file chosen</span>
+
+        <button type="submit">Post</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <div class="about-container">
+    <!-- Intro -->
+    <section class="intro">
+      <h1>Rev Circle</h1>
+      <p class="tagline">Connecting enthusiasts, one engine at a time.</p>
+    </section>
+
+    <!-- Vision, Mission, Goal -->
+    <section class="core-values">
+      <div class="card">
+        <h2>Vision</h2>
+        <p>To become the go-to online hub where car enthusiasts connect, share, and celebrate automotive culture in all its forms.</p>
+      </div>
+      <div class="card">
+        <h2>Mission</h2>
+        <p>To provide a community-driven platform for car builds, tips, experiences, and the latest in auto trends.</p>
+      </div>
+      <div class="card">
+        <h2>Goal</h2>
+        <p>Build an inclusive car community that fuels passion, learning, and connection among all auto lovers.</p>
+      </div>
+    </section>
+
+    <!-- Creator Section -->
+    <section class="creator">
+      <div class="creator-text">
+        <h2>Meet the Creator</h2>
+        <p><strong>Mark</strong> is a car enthusiast, web developer, and Creative Computing student. Inspired by a lack of clean, focused platforms for gearheads, he created Rev Circle space made by enthusiasts, for enthusiasts.</p>
+        <p>The idea came from blending his love for cars with his desire to create something meaningful online—a place to rev engines digitally and socially.</p>
+      </div>
+      <div class="creator-image">
+        <img src="assets/mark-photo.gif" alt="Mark - Creator of Rev Circle" />
+      </div>
+    </section>
+
+    <!-- Car Gallery -->
+    <section class="gallery">
+      <h2>Showroom</h2>
+      <div class="gallery-grid">
+        <img src="assets/BMW-offset.png" alt="Car 1, BMW" />
+        <img src="assets/Porsche-offst.png" alt="Car 2, Porsche" />
+        <img src="assets/Trueno-offset.png" alt="Car 3, Trueno" />
+        <img src="assets/black-BMW.png" alt="Car 4, Blue BMW" />
+        <img src="assets/blue-nsx.png" alt="Car 5, Blue NSX" />
+        <img src="assets/EVO.png" alt="Car 6, Evo" />
+        <img src="assets/green-BMW.png" alt="Car 7, Green BMW" />
+        <img src="assets/white-NSX.png" alt="Car 8, White NSX" />
+      </div>
+    </section>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <a href="../home-page/home-page.html">
+          <img src="../universal/RC-logo.png" alt="Rev Circle Logo" />
+        </a>
+        <p>&copy; 2025 Rev Circle. All rights reserved.</p>
+      </div>
+      <div class="footer-links">
+        <a href="about-page.html">About</a>
+        <a href="../home-page/home-page.html">Home</a>
+        <a href="../login-page/login.html">Logout</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JavaScript Files -->
+  <script src="about-page.js"></script>
+  <script src="../universal/post-popup.js"></script>
+</body>
+</html>

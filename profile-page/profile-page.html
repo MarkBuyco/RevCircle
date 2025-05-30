@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Profile | Rev Circle</title>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="../universal/shared.css">
+  <link rel="stylesheet" href="css/profile-page.css">
+  <link rel="icon" href="../universal/RC-logo.png" type="image/png" />
+</head>
+
+<body>
+  <!-- Navigation Bar -->
+  <nav class="navbar">
+    <a href="../home-page/home-page.html">
+      <img src="../universal/RC-logo.png" alt="Rev Circle" />
+    </a>
+    <div class="nav-links">
+      <a href="#" onclick="openPostModal()"> ➕ Post </a>
+      <a href="profile-page.html">My Profile</a>
+      <a href="../home-page/home-page.html">Home</a>
+      <a href="../login-page/login.html">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Profile Container -->
+  <div class="profile-container">
+    <!-- Profile Header -->
+    <div class="profile-header">
+      <div class="user-left">
+        <img src="assets/avatar.svg" alt="User Avatar" class="avatar" />
+        <div class="user-info">
+          <h2 id="displayUsername">@BoostedWRX</h2>
+          <p>Joined January 2024</p>
+        </div>
+      </div>
+      <button class="edit-profile-btn" onclick="openEditProfile()">✎ Edit Profile</button>
+    </div>
+
+    <!-- Section Title -->
+    <h3 class="section-title">Posts by @BoostedWRX</h3>
+
+    <!-- Post 1 -->
+    <div class="post-card">
+      <h3 class="post-title">Aftermarket exhausts worth it?</h3>
+      <p class="post-body">Thinking of installing one on my WRX. Worth the cost?</p>
+      <div class="post-footer">
+        <span>Posted by @BoostedWRX</span>
+        <div class="actions">
+          <span>👍 9</span>
+          <span>💬 2</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Post 2 -->
+    <div class="post-card">
+      <h3 class="post-title">Best tire brands for street use?</h3>
+      <p class="post-body">Need new tires for daily driving with occasional spirited runs.</p>
+      <div class="post-footer">
+        <span>Posted by @BoostedWRX</span>
+        <div class="actions">
+          <span>👍 5</span>
+          <span>💬 3</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Profile Modal -->
+  <div class="modal-overlay" id="editProfileModal">
+    <div class="modal-content">
+      <h3>Edit Profile</h3>
+      <form id="editProfileForm">
+        <!-- Username Input -->
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="@BoostedWRX" required>
+
+        <!-- Profile Image Input -->
+        <label for="profileImage">Profile Image:</label>
+        <input type="file" id="profileImage" name="profileImage" accept="image/*">
+
+        <!-- Modal Buttons -->
+        <div class="modal-buttons">
+          <button type="button" onclick="closeEditProfile()">Cancel</button>
+          <button type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+    <!-- Modal for Creating a Post -->
+  <div class="modal-overlay" id="postModal">
+    <div class="modal-content">
+      <span class="close-button" onclick="closePostModal()">×</span>
+      <h2>Create a Post</h2>
+      <form id="postForm">
+        <textarea id="caption" rows="3" placeholder="What's on your mind?" required></textarea>
+
+        <!-- Custom File Upload -->
+        <label for="imageUpload" class="custom-file-upload">
+          📁 Choose Image
+        </label>
+        <input type="file" id="imageUpload" accept="image/*" />
+        <span id="fileName">No file chosen</span>
+
+        <button type="submit">Post</button>
+      </form>
+    </div>
+</div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-logo">
+        <a href="../home-page/home-page.html">
+          <img src="../universal/RC-logo.png" alt="Rev Circle Logo" />
+        </a>
+        <p>&copy; 2025 Rev Circle. All rights reserved.</p>
+      </div>
+      <div class="footer-links">
+        <a href="../about-page/about-page.html">About</a>
+        <a href="home-page.html">Home</a>
+        <a href="../login-page/login.html">Logout</a>  
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="profile-page.js"></script>
+  <script src="../universal/post-popup.js"></script>
+</body>
+</html>

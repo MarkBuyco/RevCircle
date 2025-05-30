@@ -1,0 +1,179 @@
+/* Global reset and font settings */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Center body content and set background */
+body {
+  background: #ffe3e3;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Layout container for the login form and image */
+.container {
+  display: flex;
+  max-width: 1000px;
+  width: 90%;
+  background: #fff0e6;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+
+/* Styles for the login form section */
+.login-box {
+  flex: 1;
+  padding: 40px;
+  background: #fff0e6;
+}
+
+/* Login heading styling */
+.login-box h2 {
+  color: #e63946;
+  font-size: 32px;
+  margin-bottom: 10px;
+}
+
+/* Login subtext paragraph styling */
+.login-box p {
+  margin-bottom: 20px;
+  color: #444;
+}
+
+/* Styling for form labels */
+form label {
+  display: block;
+  margin-top: 15px;
+  font-weight: bold;
+}
+
+/* Input field styling */
+form input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+/* Layout and spacing for options row (remember me and forgot password) */
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+/* Styling for remember me checkbox and label */
+.remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+  line-height: 2;
+}
+
+.remember input[type="checkbox"] {
+  margin: 0;
+  vertical-align: middle;
+}
+
+.remember label {
+  margin: 0;
+  padding: 0;
+  vertical-align: middle;
+}
+
+/* Primary login button styling */
+.btn-login {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background-color: #e63946;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Secondary guest login button styling */
+.btn-guest {
+  margin-top: 10px;
+  width: 100%;
+  padding: 12px;
+  background: transparent;
+  border: 2px solid #ccc;
+  color: #444;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Divider line between buttons with pseudo elements */
+.divider {
+  text-align: center;
+  margin: 20px 0;
+  position: relative;
+}
+
+.divider::before,
+.divider::after {
+  content: '';
+  height: 1px;
+  width: 40%;
+  background: #ccc;
+  position: absolute;
+  top: 50%;
+}
+
+.divider::before {
+  left: 0;
+}
+
+.divider::after {
+  right: 0;
+}
+
+/* Styles for the image section beside the login form */
+.image-box {
+  flex: 1;
+  background-color: #ffccd5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Image sizing and positioning */
+.image-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Responsive styles for smaller screens */
+@media (max-width: 768px) {
+  body {
+    background: url('../assets/login-pic.png') no-repeat center center fixed;
+    background-size: cover;
+  }
+
+  .container { 
+    background: rgba(255, 240, 230, 0.9); /* semi-transparent box */
+    flex-direction: column;
+    width: 90%;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  }
+
+  .image-box {
+    display: none; /* Hide the side image box on mobile */
+  }
+}

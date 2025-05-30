@@ -1,0 +1,134 @@
+/* Feed Container */
+.feed {
+  max-width: 800px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+/* Individual Post Card Styling */
+.post-card {
+  background-color: #ffffff;
+  border-left: 6px solid #e63946; /* Red accent bar */
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  padding: 20px;
+  margin-bottom: 20px; /* Space between posts */
+  border-bottom: 2px solid #ddd; /* Light separator */
+  overflow: hidden; /* Prevent overflow from inner elements */
+}
+
+/* Post Image Styling */
+.post-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  display: block;
+  margin: 10px 0;
+  object-fit: cover; /* Ensures the image fills without distortion */
+}
+
+/* Post Title Styling */
+.post-title {
+  margin: 0 0 10px;
+  color: #e63946; /* Matches the accent color */
+}
+
+/* Post Body Text */
+.post-body {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+/* Footer: Metadata and Actions */
+.post-footer {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #666;
+}
+
+/* Action buttons like likes and comments */
+.actions span {
+  margin-left: 10px;
+}
+
+/* Generic Post Container (if reused somewhere else) */
+.posts {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+/* Post Layout Alternative */
+.post {
+  background-color: #fff0e6;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
+
+/* Image inside .post */
+.post img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin: 10px 0;
+}
+
+/* Post metadata */
+.post-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: #777;
+}
+
+/* Comments Section */
+.comments {
+  margin-top: 15px;
+  padding-top: 10px;
+  border-top: 1px solid #ddd;
+}
+
+/* Individual Comment Styling */
+.comment {
+  background-color: #f9f9f9;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-radius: 5px;
+  font-size: 14px;
+  color: #444;
+}
+
+/* Comment Form Layout */
+.comment-form {
+  display: flex;
+  gap: 10px;
+}
+
+/* Comment Input Field */
+.comment-form input {
+  flex: 1;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Comment Submit Button */
+.comment-form button {
+  background-color: #e63946;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.comment-form button:hover {
+  background-color: #cc2c3a;
+}
+
+
+
+

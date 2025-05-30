@@ -1,0 +1,114 @@
+/* Container for entire About page content */
+.about-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Intro section with title and tagline */
+.intro {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.intro h1 {
+  font-size: 36px;
+  color: #e63946; /* Red highlight for branding */
+}
+
+.tagline {
+  font-size: 18px;
+  color: #555; /* Subtle gray for secondary text */
+  margin-top: 10px;
+}
+
+/* Flex layout for Vision, Mission, Goal */
+.core-values {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 60px;
+  justify-content: center;
+}
+
+/* Individual card styling (used for Vision, Mission, Goal) */
+.card {
+  background-color: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.05); /* Soft shadow for depth */
+  flex: 1 1 300px;
+  min-width: 280px;
+  transition: transform 0.2s; /* Hover animation */
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Raise on hover */
+}
+
+.card h2 {
+  color: #aa0000; /* Deep red headings */
+  margin-bottom: 10px;
+}
+
+/* Creator bio section with image and text */
+.creator {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+/* Text portion of the creator section */
+.creator-text {
+  flex: 1 1 350px;
+}
+
+/* Image portion of the creator section */
+.creator-image {
+  flex: 1 1 250px;
+  text-align: center;
+}
+
+.creator-image img {
+  width: 100%;
+  max-width: 350px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Light shadow for portrait */
+}
+
+/* Gallery section title */
+.gallery h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #aa0000;
+}
+
+/* Responsive grid layout for car images */
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+/* Car image thumbnails */
+.gallery-grid img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.08); /* Clean floating image effect */
+  transition: transform 0.3s ease; /* Subtle scale on hover */
+}
+
+.gallery-grid img:hover {
+  transform: scale(1.03);
+}
+
+/* Mobile responsiveness for creator section */
+@media (max-width: 768px) {
+  .creator {
+    flex-direction: column; /* Stack on small screens */
+    text-align: center;
+  }
+}
