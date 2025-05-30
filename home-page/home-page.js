@@ -51,6 +51,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     const feed = document.querySelector('.feed');
     feed.innerHTML = ''; // Clear existing content
 
+    // For deleting comment and post
+    function parseJwt(token) {
+      try {
+        return JSON.parse(atob(token.split('.')[1]));
+      } catch (e) {
+        return null;
+      }
+    }
+
+const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+const currentUser = parseJwt(token);
+
+
     posts.forEach(post => {
       const postCard = document.createElement('div');
       postCard.classList.add('post-card');
@@ -77,23 +90,65 @@ document.addEventListener('DOMContentLoaded', async () => {
         <div class="actions">
           <button class="like-btn" data-id="${post._id}">👍 ${likeCount}</button>
           <span>💬 ${commentCount}</span>
+          ${post.userId?._id === currentUser.id ? `<button class="delete-post-btn" data-id="${post._id}">🗑️ Delete</button>` : ''}
         </div>
       </div>
 
-        <div class="comments">
-          ${Array.isArray(post.comments) ? post.comments.map(c => `<div class="comment"><strong>@${c.userId?.username || 'user'}:</strong> ${c.text}</div>`).join('') : ''}
-          <form class="comment-form" data-id="${post._id}">
-            <input type="text" placeholder="Write a comment..." required />
-            <button type="submit">Post</button>
-          </form>
-        </div>
+    <div class="comments">
+      ${Array.isArray(post.comments) && post.comments.map(comment => {
+        const isOwner = currentUser && (currentUser._id === comment.userId?._id || currentUser.id === comment.userId?._id);
+        return `
+          <div class="comment">
+            <strong>@${comment.userId?.username || 'user'}:</strong> ${comment.text}
+            ${isOwner ? `<button class="delete-comment-btn" data-post="${post._id}" data-comment="${comment._id}">🗑️</button>` : ''}
+          </div>
+        `;
+      }).join('') || ''}
+
+      <form class="comment-form" data-id="${post._id}">
+        <input type="text" placeholder="Write a comment..." required />
+        <button type="submit">Post</button>
+      </form>
+    </div>
+
       `;
 
       postCard.innerHTML = postHTML;
       feed.appendChild(postCard);
+
+    // Now that the post is in the DOM, attach delete button listener
+    const deleteButton = postCard.querySelector('.delete-post-btn');
+    if (deleteButton) {
+      deleteButton.addEventListener('click', async () => {
+        const postId = deleteButton.getAttribute('data-id');
+        if (!confirm('Delete this post?')) return;
+
+        const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+
+        try {
+          const res = await fetch(`http://localhost:5000/api/posts/${postId}`, {
+            method: 'DELETE',
+            headers: {
+              Authorization: `Bearer ${token}`
+            }
+          });
+
+          if (res.ok) {
+            alert('Post deleted!');
+            postCard.remove(); // Remove post without full page reload
+          } else {
+            const data = await res.json();
+            alert(data.message || 'Error deleting post');
+          }
+        } catch (err) {
+          console.error('Error deleting post:', err);
+          alert('Server error');
+        }
+      });
+    }
     }); 
 
-          // LIKE button handler
+// LIKE button handler
 document.querySelectorAll('.like-btn').forEach(button => {
   button.addEventListener('click', async () => {
     const postId = button.getAttribute('data-id');
@@ -122,47 +177,90 @@ document.querySelectorAll('.like-btn').forEach(button => {
   });
 });
 
-// COMMENT form submission handler
-document.querySelectorAll('.comment-form').forEach(form => {
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    const postId = form.getAttribute('data-id');
-    const input = form.querySelector('input');
-    const text = input.value.trim();
-    if (!text) return;
+// DELETE COMMENT
+document.querySelectorAll('.delete-comment-btn').forEach(button => {
+  button.addEventListener('click', async () => {
+    const postId = button.getAttribute('data-post');     // ✅ matches HTML
+    const commentId = button.getAttribute('data-comment'); // ✅ matches HTML
+
+    if (!confirm('Delete this comment?')) return;
 
     const token = localStorage.getItem('token') || sessionStorage.getItem('token');
 
     try {
-      const res = await fetch(`http://localhost:5000/api/posts/${postId}/comments`, {
-        method: 'POST',
+      const res = await fetch(`http://localhost:5000/api/posts/${postId}/comments/${commentId}`, {
+        method: 'DELETE',
         headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ text })
+          Authorization: `Bearer ${token}`
+        }
       });
 
       const data = await res.json();
       if (res.ok) {
-      alert('Comment added!');
-      location.reload();
-      const newCommentHTML = `<div class="comment"><strong>@${data.userId?.username || 'user'}:</strong> ${data.text}</div>`;
-      form.insertAdjacentHTML('beforebegin', newCommentHTML);
-      input.value = '';
+        alert('Comment deleted!');
+        location.reload();
       } else {
-        alert(data.message || 'Comment failed');
+        alert(data.message || 'Error deleting comment');
       }
     } catch (err) {
-      console.error('Comment error:', err);
+      console.error('Delete comment error:', err);
     }
   });
 });
+
 
   } catch (err) {
     console.error('Error loading posts:', err);
   }
 });
+
+// DELETE POST
+document.querySelectorAll('.delete-post-btn').forEach(button => {
+  button.addEventListener('click', async () => {
+    const postId = button.getAttribute('data-id');
+    if (!confirm('Delete this post?')) return;
+
+    const res = await fetch(`http://localhost:5000/api/posts/${postId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    if (res.ok) {
+      alert('Post deleted!');
+      location.reload();
+    } else {
+      const data = await res.json();
+      alert(data.message || 'Error deleting post');
+    }
+  });
+});
+
+// DELETE COMMENT
+document.querySelectorAll('.delete-comment-btn').forEach(button => {
+  button.addEventListener('click', async () => {
+    const postId = button.getAttribute('data-postid');
+    const commentId = button.getAttribute('data-commentid');
+    if (!confirm('Delete this comment?')) return;
+
+    const res = await fetch(`http://localhost:5000/api/posts/${postId}/comments/${commentId}`, {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
+
+    if (res.ok) {
+      alert('Comment deleted!');
+      location.reload();
+    } else {
+      const data = await res.json();
+      alert(data.message || 'Error deleting comment');
+    }
+  });
+});
+
 
 // LOGOUT FUNCTION
 function logout() {

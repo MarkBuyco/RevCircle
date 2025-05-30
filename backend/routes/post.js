@@ -122,5 +122,25 @@ router.post('/:id/like', verifyToken, async (req, res) => {
   }
 });
 
+// DELETE /api/posts/:postId
+router.delete('/:postId', verifyToken, async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.postId);
+    if (!post) return res.status(404).json({ message: 'Post not found' });
+
+    if (post.userId.toString() !== req.user.id) {
+      return res.status(403).json({ message: 'Not authorized to delete this post' });
+    }
+
+    await Post.findByIdAndDelete(req.params.postId);
+    res.json({ message: 'Post deleted' });
+  } catch (err) {
+    console.error('Delete error:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+
 
 module.exports = router;
