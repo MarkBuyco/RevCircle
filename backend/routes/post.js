@@ -140,6 +140,31 @@ router.delete('/:postId', verifyToken, async (req, res) => {
   }
 });
 
+// DELETE a comment from a post
+router.delete('/:postId/comments/:commentId', verifyToken, async (req, res) => {
+  try {
+    const { postId, commentId } = req.params;
+    const post = await Post.findById(postId);
+    if (!post) return res.status(404).json({ message: 'Post not found' });
+
+    const comment = post.comments.id(commentId);
+    if (!comment) return res.status(404).json({ message: 'Comment not found' });
+
+    if (comment.userId.toString() !== req.user.id) {
+      return res.status(403).json({ message: 'Not authorized to delete this comment' });
+    }
+
+    // Remove comment by id
+    post.comments.pull(commentId);
+
+    await post.save();
+
+    res.json({ message: 'Comment deleted' });
+  } catch (err) {
+    console.error('❌ Error deleting comment:', err);
+    res.status(500).json({ error: 'Server error' });
+  }
+});
 
 
 
