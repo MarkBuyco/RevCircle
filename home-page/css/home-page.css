@@ -146,3 +146,80 @@
   box-shadow: 0 0 8px rgba(230, 57, 70, 0.2);
 }
 
+.like-btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #555;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.2s ease, transform 0.1s ease;
+}
+
+.like-btn:hover {
+  color: #e63946; /* hover color */
+}
+
+.like-btn:active {
+  transform: scale(0.95); /* slight click shrink */
+}
+
+.comment-count {
+  color: #555;
+  font-size: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.2s ease;
+}
+
+.comment-count:hover {
+  color: #1d3557; /* subtle blue hover */
+  cursor: pointer;
+}
+
+.delete-post-btn {
+  background-color: #e63946; /* Red-ish danger color */
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  margin: 10px;
+}
+
+.delete-post-btn:hover {
+  background-color: #d62828; /* Deeper red on hover */
+  transform: scale(1.05);
+}
+
+.delete-post-btn:active {
+  transform: scale(0.97);
+}
+
+
+.delete-comment-btn {
+  background-color: #e63946; /* red background */
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+  flex-shrink: 0;
+  margin-left: 10px;
+}
+
+.delete-comment-btn:hover {
+  background-color: #d62828; /* darker red on hover */
+}
+
+
+
+
+
+

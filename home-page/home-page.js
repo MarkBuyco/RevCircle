@@ -85,8 +85,8 @@ document.addEventListener('DOMContentLoaded', async () => {
           <span>Posted by @${post.userId?.username || 'Unknown'}</span>
           <div class="actions">
             <button class="like-btn" data-id="${post._id}">👍 ${likeCount}</button>
-            <span>💬 ${commentCount}</span>
-            ${post.userId?._id === currentUser?.id ? `<button class="delete-post-btn" data-id="${post._id}">🗑️ Delete</button>` : ''}
+            <span class="comment-count">💬 ${commentCount}</span>
+            ${post.userId?._id === currentUser?.id ? `<button class="delete-post-btn" data-id="${post._id}"> Delete Post</button>` : ''}
           </div>
         </div>
 
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             return `
               <div class="comment">
                 <strong>@${comment.userId?.username || 'user'}:</strong> ${comment.text}
-                ${isOwner ? `<button class="delete-comment-btn" data-post="${post._id}" data-comment="${comment._id}">🗑️</button>` : ''}
+                ${isOwner ? `<button class="delete-comment-btn" data-post="${post._id}" data-comment="${comment._id}">Delete</button>` : ''}
               </div>
             `;
           }).join('')}
@@ -230,5 +230,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     console.error('Error loading posts:', err);
   }
 });
+
+
 
 
