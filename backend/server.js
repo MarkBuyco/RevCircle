@@ -5,19 +5,28 @@ const cors = require('cors');
 const path = require('path');
 const postRoutes = require('../backend/routes/post'); // ✅ Make sure path is correct
 
+// Initialize Express App
+const app = express();
+app.use(cors());
+app.use(express.json());
+
+// Adjust the path to reach login-page from backend
+app.use(express.static(path.join(__dirname, '..', 'login-page')));
+
+// Serve login.html on root
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'login-page', 'login.html'));
+});
+
 require('dotenv').config();
 
 
 // Check if MONGO_URI is loaded properly
 console.log("👉 MONGO_URI is:", process.env.MONGO_URI);
 
-// Initialize Express App
-const app = express();
-app.use(cors());
-app.use(express.json());
+
 
 // Middleware
-app.use(express.json()); //DOuble check if this is needed since it's already above
 app.use(express.urlencoded({ extended: true }));
 
 // Routes
