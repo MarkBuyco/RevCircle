@@ -13,13 +13,13 @@ app.use(cors());
 app.use(express.json());
 
 // Adjust the path to reach login-page from backend
-app.use(express.static(path.join(__dirname, '..', 'login-page')));
+app.use(express.static(path.join(__dirname, '..', '/login-page')));
 app.use(express.static(path.join(__dirname, '..', 'about-page')));
 app.use(express.static(path.join(__dirname, '..', 'forgot-password')));
 app.use(express.static(path.join(__dirname, '..', 'guidelines-page')));
 app.use(express.static(path.join(__dirname, '..', 'home-page')));
 app.use(express.static(path.join(__dirname, '..', 'profile-page')));
-app.use(express.static(path.join(__dirname, '..', 'signup-page')));  
+app.use(express.static(path.join(__dirname, '..', '/signup-page')));  
 
 
 // Serve login.html on root
@@ -47,7 +47,7 @@ app.get('/profile', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'profile-page', 'profile-page.html'));
 });
 
-app.get('/signup-page', (req, res) => {
+app.get('/signup', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'signup-page', 'signup.html'));
 });
 
