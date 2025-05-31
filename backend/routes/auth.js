@@ -74,4 +74,10 @@ router.post('/forgot-password', async (req, res) => {
   }
 });
 
+// ✅ Test Route
+router.get('/test', (req, res) => {
+  res.json({ message: 'Auth route working!' });
+});
+
+
 module.exports = router;
