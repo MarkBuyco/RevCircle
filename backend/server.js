@@ -1,3 +1,5 @@
+require('dotenv').config();
+
 // This file sets up an Express server, connects to a MongoDB database, and defines routes for user authentication.
 const express = require('express');
 const mongoose = require('mongoose');
@@ -25,7 +27,31 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'login-page', 'login.html'));
 });
 
-require('dotenv').config();
+app.get('/about', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'about-page', 'about-page.html'));
+});
+
+app.get('/forgot-password', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'forgot-password', 'forgot-password.html'));
+});
+
+app.get('/guidelines', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'guidelines-page', 'guideline-page.html'));
+});
+
+app.get('/home', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'home-page', 'home-page.html'));
+});
+
+app.get('/profile', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'profile-page', 'profile-page.html'));
+});
+
+app.get('/signup', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'signup-page', 'signup.html'));
+});
+
+
 
 
 // Check if MONGO_URI is loaded properly
