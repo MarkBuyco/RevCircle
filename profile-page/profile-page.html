@@ -32,14 +32,14 @@
         <img src="assets/avatar.svg" alt="User Avatar" class="avatar" />
         <div class="user-info">
           <h2 id="displayUsername">@BoostedWRX</h2>
-          <p>Joined January 2024</p>
+          <p>Joined May 2025</p>
         </div>
       </div>
       <button class="edit-profile-btn" onclick="openEditProfile()">✎ Edit Profile</button>
     </div>
 
     <!-- Section Title -->
-    <h3 class="section-title">Posts by @BoostedWRX</h3>
+    <h3 class="section-title">Posts</h3>
 
     <!-- Post 1 -->
     <div class="post-card">
@@ -72,21 +72,22 @@
   <div class="modal-overlay" id="editProfileModal">
     <div class="modal-content">
       <h3>Edit Profile</h3>
-      <form id="editProfileForm">
-        <!-- Username Input -->
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" value="@BoostedWRX" required>
+    <form id="profileUpdateForm">
+      <!-- Username Input -->
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" value="BoostedWRX" required>
 
-        <!-- Profile Image Input -->
-        <label for="profileImage">Profile Image:</label>
-        <input type="file" id="profileImage" name="profileImage" accept="image/*">
+      <!-- Profile Image Input -->
+      <label for="profileImage">Profile Image:</label>
+      <input type="file" id="profileImage" name="profileImage" accept="image/*">
 
-        <!-- Modal Buttons -->
-        <div class="modal-buttons">
-          <button type="button" onclick="closeEditProfile()">Cancel</button>
-          <button type="submit">Save</button>
-        </div>
-      </form>
+      <!-- Modal Buttons -->
+      <div class="modal-buttons">
+        <button type="button" onclick="closeEditProfile()">Cancel</button>
+        <button type="submit">Save</button>
+      </div>
+    </form>
+
     </div>
   </div>
 
@@ -111,7 +112,7 @@
 
   <!-- Scripts -->
   <script src="../universal/logout.js"></script>
-  <script src="profile-page.js"></script>
+  <script src="profile-page.js" defer></script>
   <script src="../universal/post-popup.js"></script>
 </body>
 

@@ -1,35 +1,150 @@
-// Profile Page JavaScript
-
-// Function to toggle the visibility of the profile menu
 function openEditProfile() {
-    document.getElementById('editProfileModal').style.display = 'flex';
+  const modal = document.getElementById("editProfileModal");
+  const usernameInput = document.getElementById("username");
+  const displayName = document.getElementById("displayUsername").textContent;
+
+  // Strip '@' from display name and set input value
+  usernameInput.value = displayName.replace(/^@/, "");
+
+  modal.style.display = "flex";
 }
 
-// Function to close the profile menu
 function closeEditProfile() {
-    document.getElementById('editProfileModal').style.display = 'none';
+  const modal = document.getElementById("editProfileModal");
+  modal.style.display = "none";
 }
 
-// Handle Edit Form Submission
-document.getElementById('editProfileForm').addEventListener('submit', function(e) {
-    e.preventDefault();
+document.addEventListener('DOMContentLoaded', async () => {
+  const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+  console.log("Token on profile page load:", token);
 
-    // Get new username and image from form
-    const newUsername = document.getElementById('username').value;
-    const newImage = document.getElementById('profileImage').files[0];
+  if (!token) {
+    console.log("No token found, redirecting to login");
+    window.location.href = '../login-page/login.html';
+    return;
+  }
 
-    // Update username display
-    document.getElementById('displayUsername').textContent = newUsername;
+  try {
+    // Fetch user profile info
+    const res = await fetch('http://localhost:5000/api/users/me', {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    });
 
-    // Update avatar image preview if new file is selected
-    if (newImage) {
-    const reader = new FileReader();
-    reader.onload = function(e) {
-        document.querySelector('.avatar').src = e.target.result;
-    };
-    reader.readAsDataURL(newImage);
+    console.log("Profile fetch status:", res.status);
+
+    if (!res.ok) throw new Error('Failed to fetch user profile');
+
+    const userData = await res.json();
+
+    // Update username and avatar on page
+    document.getElementById('displayUsername').textContent = '@' + userData.username;
+
+    if (userData.profileImage) {
+      document.querySelector('.avatar').src = 'http://localhost:5000' + userData.profileImage;
     }
 
-    // Close modal
-    closeEditProfile();
+    // Populate the edit form username input for convenience
+    document.getElementById('username').value = userData.username;
+
+    // Load user's posts
+    loadUserPosts(userData._id, token);
+
+  } catch (error) {
+    console.error(error);
+    alert('Error loading profile. Please login again.');
+    window.location.href = '../login-page/login.html';
+  }
 });
+
+async function loadUserPosts(userId, token) {
+  try {
+    const res = await fetch(`http://localhost:5000/api/posts/user/${userId}`, {
+      headers: { Authorization: `Bearer ${token}` }
+    });
+
+    if (!res.ok) throw new Error('Failed to load posts');
+
+    const posts = await res.json();
+
+    const container = document.querySelector('.profile-container');
+    container.innerHTML = ''; // Clear any existing posts before appending new ones
+
+    posts.forEach(post => {
+      const postCard = document.createElement('div');
+      postCard.classList.add('post-card');
+      postCard.innerHTML = `
+        <h3 class="post-title">${post.title}</h3>
+        <p class="post-body">${post.body}</p>
+        <div class="post-footer">
+          <span>Posted by @${post.username}</span>
+          <div class="actions">
+            <span>👍 ${post.likesCount}</span>
+            <span>💬 ${post.commentsCount}</span>
+          </div>
+        </div>
+      `;
+
+      container.appendChild(postCard);
+    });
+  } catch (error) {
+    console.error(error);
+    alert('Failed to load user posts');
+  }
+}
+
+document.getElementById('profileUpdateForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const newUsername = document.getElementById('username').value;
+  const newImage = document.getElementById('profileImage').files[0];
+
+  const formData = new FormData();
+  formData.append('username', newUsername);
+  if (newImage) {
+    formData.append('profileImage', newImage);
+  }
+
+  try {
+    const token = localStorage.getItem('token') || sessionStorage.getItem('token');
+    console.log("🧪 token before fetch:", token);
+    if (!token) {
+      alert('No token found. Please log in again.');
+      window.location.href = '../login-page/login.html';
+      return;
+    }
+
+    const res = await fetch('http://localhost:5000/api/users/me', {
+      method: 'PUT',
+      headers: {
+        Authorization: `Bearer ${token}`
+        // Don't set Content-Type when using FormData
+      },
+      body: formData
+    });
+
+    if (!res.ok) {
+      const errorText = await res.text();
+      throw new Error(`Failed to update profile: ${errorText}`);
+    }
+
+    const updatedUser = await res.json();
+    console.log('✅ Profile updated:', updatedUser);
+
+    // ✅ Update UI with latest values (Preview here!)
+    document.getElementById('displayUsername').textContent = '@' + updatedUser.username;
+    if (updatedUser.profileImage) {
+      document.querySelector('.avatar').src = 'http://localhost:5000' + updatedUser.profileImage;
+    }
+
+    alert('✅ Profile updated successfully!');
+    closeEditProfile();
+
+  } catch (err) {
+    console.error('❌ Error updating profile:', err);
+  }
+});
+
+
+
