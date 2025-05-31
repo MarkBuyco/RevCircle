@@ -48,51 +48,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     // Populate the edit form username input for convenience
     document.getElementById('username').value = userData.username;
 
-    // Load user's posts
-    loadUserPosts(userData._id, token);
-
   } catch (error) {
     console.error(error);
     alert('Error loading profile. Please login again.');
     window.location.href = '../login-page/login.html';
   }
 });
-
-async function loadUserPosts(userId, token) {
-  try {
-    const res = await fetch(`http://localhost:5000/api/posts/user/${userId}`, {
-      headers: { Authorization: `Bearer ${token}` }
-    });
-
-    if (!res.ok) throw new Error('Failed to load posts');
-
-    const posts = await res.json();
-
-    const container = document.querySelector('.profile-container');
-    container.innerHTML = ''; // Clear any existing posts before appending new ones
-
-    posts.forEach(post => {
-      const postCard = document.createElement('div');
-      postCard.classList.add('post-card');
-      postCard.innerHTML = `
-        <h3 class="post-title">${post.title}</h3>
-        <p class="post-body">${post.body}</p>
-        <div class="post-footer">
-          <span>Posted by @${post.username}</span>
-          <div class="actions">
-            <span>👍 ${post.likesCount}</span>
-            <span>💬 ${post.commentsCount}</span>
-          </div>
-        </div>
-      `;
-
-      container.appendChild(postCard);
-    });
-  } catch (error) {
-    console.error(error);
-    alert('Failed to load user posts');
-  }
-}
 
 document.getElementById('profileUpdateForm').addEventListener('submit', async (e) => {
   e.preventDefault();
