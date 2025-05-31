@@ -12,6 +12,13 @@ app.use(express.json());
 
 // Adjust the path to reach login-page from backend
 app.use(express.static(path.join(__dirname, '..', 'login-page')));
+app.use(express.static(path.join(__dirname, '..', 'about-page')));
+app.use(express.static(path.join(__dirname, '..', 'forgot-password')));
+app.use(express.static(path.join(__dirname, '..', 'guidelines-page')));
+app.use(express.static(path.join(__dirname, '..', 'home-page')));
+app.use(express.static(path.join(__dirname, '..', 'profile-page')));
+app.use(express.static(path.join(__dirname, '..', 'signup-page')));  
+
 
 // Serve login.html on root
 app.get('/', (req, res) => {
