@@ -12,6 +12,10 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+//favicon
+app.use('/universal', express.static(path.join(__dirname, '..', 'universal')));
+
+
 app.use(express.static(path.join(__dirname, '..')));
 
 app.get('/', (req, res) => {
