@@ -13,13 +13,14 @@ app.use(cors());
 app.use(express.json());
 
 // Adjust the path to reach login-page from backend
-app.use(express.static(path.join(__dirname, '..', '/login-page')));
-app.use(express.static(path.join(__dirname, '..', 'about-page')));
-app.use(express.static(path.join(__dirname, '..', 'forgot-password')));
-app.use(express.static(path.join(__dirname, '..', 'guidelines-page')));
-app.use(express.static(path.join(__dirname, '..', 'home-page')));
-app.use(express.static(path.join(__dirname, '..', 'profile-page')));
-app.use(express.static(path.join(__dirname, '..', '/signup-page')));  
+app.use('/login-page', express.static(path.join(__dirname, '..', 'login-page')));
+app.use('/about-page', express.static(path.join(__dirname, '..', 'about-page')));
+app.use('/forgot-password', express.static(path.join(__dirname, '..', 'forgot-password')));
+app.use('/guidelines-page', express.static(path.join(__dirname, '..', 'guidelines-page')));
+app.use('/home-page', express.static(path.join(__dirname, '..', 'home-page')));
+app.use('/profile-page', express.static(path.join(__dirname, '..', 'profile-page')));
+app.use('/signup-page', express.static(path.join(__dirname, '..', 'signup-page')));
+
 
 
 // Serve login.html on root
@@ -50,9 +51,6 @@ app.get('/profile', (req, res) => {
 app.get('/signup', (req, res) => {
   res.sendFile(path.join(__dirname, '..', 'signup-page', 'signup.html'));
 });
-
-
-
 
 // Check if MONGO_URI is loaded properly
 console.log("👉 MONGO_URI is:", process.env.MONGO_URI);
