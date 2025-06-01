@@ -2,7 +2,7 @@ const resetPassword = async () => {
   const email = document.querySelector('#email').value;
   const newPassword = document.querySelector('#newPassword').value;
 
-  const res = await fetch('http://localhost:5000/api/auth/forgot-password', {
+  const res = await fetch('https://revcircle.onrender.com/api/auth/forgot-password', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ email, newPassword })

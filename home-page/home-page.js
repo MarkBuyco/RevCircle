@@ -21,7 +21,7 @@ document.getElementById('postForm').addEventListener('submit', async function (e
   const token = localStorage.getItem('token') || sessionStorage.getItem('token');
 
   try {
-    const res = await fetch('http://localhost:5000/api/posts', {
+    const res = await fetch('https://revcircle.onrender.com/api/posts', {
       method: 'POST',
       headers: { Authorization: `Bearer ${token}` },
       body: formData
@@ -43,7 +43,7 @@ document.getElementById('postForm').addEventListener('submit', async function (e
 // RENDER POSTS ON PAGE LOAD
 document.addEventListener('DOMContentLoaded', async () => {
   try {
-    const res = await fetch('http://localhost:5000/api/posts');
+    const res = await fetch('https://revcircle.onrender.com/api/posts');
     const posts = await res.json();
     const feed = document.querySelector('.feed');
     feed.innerHTML = '';
@@ -72,7 +72,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (post.image) {
         postHTML += `
           <div class="post-image">
-            <img src="http://localhost:5000/${post.image}" alt="Post image" />
+            <img src="https://revcircle.onrender.com/${post.image}" alt="Post image" />
           </div>
         `;
       }
@@ -123,7 +123,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (!commentText) return alert('Comment cannot be empty.');
 
         try {
-          const res = await fetch(`http://localhost:5000/api/posts/${postId}/comments`, {
+          const res = await fetch(`https://revcircle.onrender.com/api/posts/${postId}/comments`, {
             method: 'POST',
             headers: {
               Authorization: `Bearer ${token}`,
@@ -157,12 +157,12 @@ document.addEventListener('DOMContentLoaded', async () => {
           
           console.log('Deleting comment for post:', button.dataset.post);
           console.log('Comment ID:', button.dataset.comment);
-          console.log('URL:', `http://localhost:5000/api/posts/${button.dataset.post}/comments/${button.dataset.comment}`)
+          console.log('URL:', `https://revcircle.onrender.com/api/posts/${button.dataset.post}/comments/${button.dataset.comment}`)
 
           console.log('Confirmed delete. Sending DELETE request for comment:', button.dataset.comment, 'post:', button.dataset.post);
 
           try {
-            const res = await fetch(`http://localhost:5000/api/posts/${button.dataset.post}/comments/${button.dataset.comment}`, {
+            const res = await fetch(`https://revcircle.onrender.com/api/posts/${button.dataset.post}/comments/${button.dataset.comment}`, {
               method: 'DELETE',
               headers: { Authorization: `Bearer ${token}` }
             });
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         deleteBtn.addEventListener('click', async () => {
           if (!confirm('Delete this post?')) return;
 
-          const res = await fetch(`http://localhost:5000/api/posts/${deleteBtn.dataset.id}`, {
+          const res = await fetch(`https://revcircle.onrender.com/api/posts/${deleteBtn.dataset.id}`, {
             method: 'DELETE',
             headers: { Authorization: `Bearer ${token}` }
           });
@@ -208,7 +208,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       // LIKE POST
       postCard.querySelectorAll('.like-btn').forEach(button => {
         button.addEventListener('click', async () => {
-          const res = await fetch(`http://localhost:5000/api/posts/${button.dataset.id}/like`, {
+          const res = await fetch(`https://revcircle.onrender.com/api/posts/${button.dataset.id}/like`, {
             method: 'POST',
             headers: {
               Authorization: `Bearer ${token}`,

@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   try {
     // Fetch user profile info
-    const res = await fetch('http://localhost:5000/api/users/me', {
+    const res = await fetch('https://revcircle.onrender.com/api/users/me', {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     document.getElementById('displayUsername').textContent = '@' + userData.username;
 
     if (userData.profileImage) {
-      document.querySelector('.avatar').src = 'http://localhost:5000' + userData.profileImage;
+      document.querySelector('.avatar').src = 'https://revcircle.onrender.com' + userData.profileImage;
     }
 
     // Populate the edit form username input for convenience
@@ -76,7 +76,7 @@ document.getElementById('profileUpdateForm').addEventListener('submit', async (e
       return;
     }
 
-    const res = await fetch('http://localhost:5000/api/users/me', {
+    const res = await fetch('https://revcircle.onrender.com/api/users/me', {
       method: 'PUT',
       headers: {
         Authorization: `Bearer ${token}`
@@ -96,7 +96,7 @@ document.getElementById('profileUpdateForm').addEventListener('submit', async (e
     // ✅ Update UI with latest values (Preview here!)
     document.getElementById('displayUsername').textContent = '@' + updatedUser.username;
     if (updatedUser.profileImage) {
-      document.querySelector('.avatar').src = 'http://localhost:5000' + updatedUser.profileImage;
+      document.querySelector('.avatar').src = 'https://revcircle.onrender.com' + updatedUser.profileImage;
     }
 
     alert('✅ Profile updated successfully!');

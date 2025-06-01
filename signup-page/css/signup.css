@@ -101,6 +101,11 @@ form input {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+  body {
+    background: url('../assets/sign-up-poster.png') no-repeat center center fixed;
+    background-size: cover;
+  }
+
   .container {
     flex-direction: column;
     height: auto;
@@ -110,13 +115,7 @@ form input {
     display: none; /* Hide the image section */
   }
 
-  .signup-box {
-    width: 100%;
-    background-image: url('../assets/sign-up-poster.png');
-    background-size: cover;
-    background-position: center;
-    backdrop-filter: brightness(95%);
-  }
+
 
   .signup-box h2,
   .signup-box p,
